@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-agent
+  labels:
+    jenkins: agent
+spec:
+  containers:
+  - name: jnlp
+    image: anooprs471/jenkins-slave-cnb-jdk11-remote4_13:v3
+    volumeMounts:
+      - name: docker-sock
+        mountPath: /var/run/docker.sock
+  volumes:
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
