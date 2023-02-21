@@ -1,5 +1,5 @@
 pipeline {
-  node('ec2-node01')
+  agent { label 'ec2-ubuntu-node01' }
   
   environment{
     DOCKER_USERNAME = credentials('DOCKER_USERNAME')
