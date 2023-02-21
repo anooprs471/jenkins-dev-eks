@@ -1,10 +1,6 @@
 pipeline {
-  agent {
-    kubernetes {
-      yamlFile 'builder.yaml'
-    }
-
-  }
+  node('ec2-node01')
+  
   environment{
     DOCKER_USERNAME = credentials('DOCKER_USERNAME')
     DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
@@ -40,11 +36,6 @@ pipeline {
 		}
     }
 
-    stage('deploy') {
-      steps {
-        sh 'echo "Place Holder For Deployment"'
-      }
-    }
     stage('Deploy App to Kubernetes') {     
       steps {
           withCredentials([file(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
